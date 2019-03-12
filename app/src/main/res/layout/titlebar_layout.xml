@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#174717"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:text="SUSE NEWS"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="italic|bold" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/serach"
+        android:drawablePadding="10dp"
+        android:focusable="false"
+        android:hint="讲座  |  晚会"
+        android:imeOptions="actionSearch"
+        android:singleLine="true" />
+</LinearLayout>
