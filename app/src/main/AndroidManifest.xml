@@ -6,7 +6,6 @@
         android:name=".utils.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -18,7 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GuideActivity"></activity>
+        <activity android:name=".activity.GuideActivity" />
+        <activity android:name=".activity.NewsDetailsActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.PersonAppoActivity" />
+        <activity android:name=".activity.PersonMsgActivity" />
+        <activity android:name=".activity.PersonInfoActivity"></activity>
     </application>
 
 </manifest>
