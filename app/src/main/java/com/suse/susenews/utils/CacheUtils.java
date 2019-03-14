@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 
 public class CacheUtils {
     public static final String READ_ARRAY_ID = "read_array_id";
+    public static final String USER_NAME = "USER_NAME";
+    public static final String USER_SEX = "user_sex";
+
     public static  String USER_ACCOUNT = "123456";//在登录后更新这个值
 
     public static boolean getBoolean(Context context, String key) {

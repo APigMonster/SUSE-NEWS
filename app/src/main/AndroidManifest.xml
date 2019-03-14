@@ -8,6 +8,7 @@
         android:icon="@mipmap/icon"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:label="SUSE NEWS"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.WelcomeActivity">
@@ -22,7 +23,8 @@
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.PersonAppoActivity" />
         <activity android:name=".activity.PersonMsgActivity" />
-        <activity android:name=".activity.PersonInfoActivity"></activity>
+        <activity android:name=".activity.PersonInfoActivity" />
+        <activity android:name=".activity.UserNameActivity"></activity>
     </application>
 
 </manifest>

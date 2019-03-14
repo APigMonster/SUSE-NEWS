@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/mycolor</item>
         <item name="colorPrimaryDark">@color/mycolor</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@drawable/btn_bg_enable_selector</item>
     </style>
     <style name="myRadioGroup">
         <item name="android:layout_width">0dp</item>
