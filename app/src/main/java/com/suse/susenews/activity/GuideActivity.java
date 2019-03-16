@@ -148,10 +148,10 @@ public class GuideActivity extends Activity {
     }
 
     public void toMain(View v) {
-        startActivity(new Intent(GuideActivity.this, MainActivity.class));
+        startActivity(new Intent(GuideActivity.this, LoginActivity.class));
         overridePendingTransition(R.anim.right_in, R.anim.left_out);
         //设置数据库已经进入过引导页面
-        CacheUtils.putBoolean(GuideActivity.this, WelcomeActivity.START_MAIN, true);
+        CacheUtils.putBoolean(GuideActivity.this,CacheUtils.SPNAME, WelcomeActivity.START_MAIN, true);
         finish();
     }
 }

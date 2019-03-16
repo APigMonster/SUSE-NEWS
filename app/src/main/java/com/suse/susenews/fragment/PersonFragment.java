@@ -11,12 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.suse.susenews.R;
+import com.suse.susenews.activity.LoginActivity;
+import com.suse.susenews.activity.MainActivity;
 import com.suse.susenews.activity.PersonAppoActivity;
 import com.suse.susenews.activity.PersonInfoActivity;
 import com.suse.susenews.activity.PersonMsgActivity;
 import com.suse.susenews.adapter.PersonRelateAdapter;
 import com.suse.susenews.bean.PersonRelateBean;
 import com.suse.susenews.utils.BaseFragment;
+import com.suse.susenews.utils.CacheUtils;
 import com.suse.susenews.utils.MyApplication;
 
 import java.util.ArrayList;
@@ -43,7 +46,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
      * (http://www.buzzingandroid.com/tools/android-layout-finder)
      */
     private void findViews(View view) {
-        rlPersonInfo = view.findViewById( R.id.rl_person_info );
+        rlPersonInfo = view.findViewById(R.id.rl_person_info);
         btn_exit_login = view.findViewById(R.id.btn_exit_login);
 
         rv_person_relate = view.findViewById(R.id.rv_person_relate);
@@ -78,10 +81,15 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        if (v == rlPersonInfo){
+        if (v == rlPersonInfo) {
             startActivity(new Intent(mcontext, PersonInfoActivity.class));
-        }else if (v == btn_exit_login){
-            Toast.makeText(mcontext, "退出登录", Toast.LENGTH_SHORT).show();
+        } else if (v == btn_exit_login) {
+            //退出登录；清空账号，跳转到登录页面
+            CacheUtils.putString(mcontext, CacheUtils.SPNAME, "login_account", "");
+            startActivity(new Intent(mcontext, LoginActivity.class));
+            //关闭页面
+            MainActivity mainActivity = (MainActivity) mcontext;
+            mainActivity.finish();
         }
     }
 }

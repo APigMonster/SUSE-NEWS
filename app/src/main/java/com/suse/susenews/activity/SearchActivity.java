@@ -50,7 +50,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         getEditTextValue();
 
         //初始化数据(历史记录)
-        sdata = CacheUtils.getString(SearchActivity.this, SEARCH_HISTORY);
+        sdata = CacheUtils.getString(SearchActivity.this, CacheUtils.SPNAME, SEARCH_HISTORY);
         data = Arrays.asList(sdata.split(","));//先把字符串以关键字","分割成字符串数组；再把字符串数组转化为列表
         Collections.reverse(data); //把列表翻转
         //设置适配器
@@ -60,21 +60,21 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     }
 
     private void isShowHistory(String sdata) {
-        if (sdata.isEmpty()){
+        if (sdata.isEmpty()) {
             rl_search_history.setVisibility(View.GONE);
         }
     }
 
-    public void emptySearchHistory(View v){
+    public void emptySearchHistory(View v) {
         rl_search_history.setVisibility(View.GONE);
-        CacheUtils.putString(SearchActivity.this, SEARCH_HISTORY, "");
+        CacheUtils.putString(SearchActivity.this, CacheUtils.SPNAME, SEARCH_HISTORY, "");
     }
 
     private String getEditTextValue() {
         String value = et_search.getText().toString();
-        if (TextUtils.isEmpty(et_search.getText())){
+        if (TextUtils.isEmpty(et_search.getText())) {
             return null;
-        }else {
+        } else {
             return value;
         }
     }
@@ -82,18 +82,18 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == tv_search){
-            if (getEditTextValue() == null){
+        if (v == tv_search) {
+            if (getEditTextValue() == null) {
                 Toast.makeText(SearchActivity.this, "搜索内容不能为空", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 //判断是否存在
-                if (!Arrays.asList(data).contains(getEditTextValue())){
+                if (!Arrays.asList(data).contains(getEditTextValue())) {
                     String value = sdata + getEditTextValue() + ",";
-                    CacheUtils.putString(SearchActivity.this, SEARCH_HISTORY, value);
-                    Toast.makeText(SearchActivity.this, "搜索 : "+getEditTextValue(), Toast.LENGTH_SHORT).show();
+                    CacheUtils.putString(SearchActivity.this, CacheUtils.SPNAME, SEARCH_HISTORY, value);
+                    Toast.makeText(SearchActivity.this, "搜索 : " + getEditTextValue(), Toast.LENGTH_SHORT).show();
                 }
             }
-        }else if (v == iv_cancel){
+        } else if (v == iv_cancel) {
             et_search.setText("");
         }
     }

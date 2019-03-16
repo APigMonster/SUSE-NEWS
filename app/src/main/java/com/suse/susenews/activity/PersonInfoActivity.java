@@ -41,8 +41,8 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
 
     private void initData() {
         //用户名应该从数据库查询得到
-        String userName = CacheUtils.getString(PersonInfoActivity.this, CacheUtils.USER_NAME);
-        String userSex = CacheUtils.getString(PersonInfoActivity.this, CacheUtils.USER_SEX);
+        String userName = CacheUtils.getString(PersonInfoActivity.this, CacheUtils.USER_ACCOUNT, CacheUtils.USER_NAME);
+        String userSex = CacheUtils.getString(PersonInfoActivity.this,  CacheUtils.USER_ACCOUNT,CacheUtils.USER_SEX);
         data.add(new PersonSimpleInfoBean("用户名", userName));
         data.add(new PersonSimpleInfoBean("性别", userSex));
         data.add(new PersonSimpleInfoBean("更多", " "));

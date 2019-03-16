@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.webkit.WebView;
 
 import com.suse.susenews.R;
 import com.suse.susenews.utils.CacheUtils;
@@ -18,22 +19,30 @@ public class WelcomeActivity extends Activity {
     public static final String START_MAIN = "start_main";
     private int WHAT_TO_ACTIVITY = 1;
 
-    private Handler mhandler = new Handler(){
+    private Handler mhandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            boolean isStartMain = CacheUtils.getBoolean(WelcomeActivity.this, START_MAIN);
-            if (isStartMain){
-                //进入过主界面，直接进入主界面
-                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-            }else {
-                //没有进入过主界面，先进入引导页面
-                startActivity(new Intent(WelcomeActivity.this, GuideActivity.class));
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-            }
-            finish();
+            isStartMain();
         }
     };
+
+    private void isStartMain() {
+        boolean isStartMain = CacheUtils.getBoolean(WelcomeActivity.this, CacheUtils.SPNAME, START_MAIN);
+        if (isStartMain) {
+            //进入过主界面，直接进入主界面
+            if (CacheUtils.USER_ACCOUNT.isEmpty()){
+                startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+            }else {
+                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+            }
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+        } else {
+            //没有进入过主界面，先进入引导页面
+            startActivity(new Intent(WelcomeActivity.this, GuideActivity.class));
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+        }
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

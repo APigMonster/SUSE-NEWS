@@ -19,11 +19,11 @@ import com.suse.susenews.utils.MyApplication;
 
 import java.util.List;
 
-public class MainNewsAdapter extends RecyclerView.Adapter<MainNewsAdapter.ViewHolder>{
+public class MainNewsAdapter extends RecyclerView.Adapter<MainNewsAdapter.ViewHolder> {
 
     private List<MainNewsBean> mdata;
     private Context context;
-    private String idArray = CacheUtils.getString(MyApplication.getContext(), CacheUtils.READ_ARRAY_ID);
+    private String idArray = CacheUtils.getString(MyApplication.getContext(), CacheUtils.SPNAME, CacheUtils.READ_ARRAY_ID);
 
     public MainNewsAdapter(List<MainNewsBean> mdata, Context context) {
         this.mdata = mdata;
@@ -41,10 +41,10 @@ public class MainNewsAdapter extends RecyclerView.Adapter<MainNewsAdapter.ViewHo
             public void onClick(View v) {
                 int position = viewHolder.getAdapterPosition();
                 String id = mdata.get(position).getId();
-                if (!idArray.contains(id)){
-                    CacheUtils.putString(MyApplication.getContext(), CacheUtils.READ_ARRAY_ID, idArray+id+",");
+                if (!idArray.contains(id)) {
+                    CacheUtils.putString(MyApplication.getContext(), CacheUtils.SPNAME, CacheUtils.READ_ARRAY_ID, idArray + id + ",");
                     //点击时设置字体为灰色
-                   viewHolder.title.setTextColor(Color.GRAY);
+                    viewHolder.title.setTextColor(Color.GRAY);
                 }
                 //跳转到详情Activity
                 Intent intent = new Intent(context, NewsDetailsActivity.class);
@@ -62,9 +62,9 @@ public class MainNewsAdapter extends RecyclerView.Adapter<MainNewsAdapter.ViewHo
         viewHolder.icon.setImageResource(mainNewsBean.getIcon());
         viewHolder.title.setText(mainNewsBean.getTitle());
         //判断是否点击(阅读)过
-        if (idArray.contains(mainNewsBean.getId())){
+        if (idArray.contains(mainNewsBean.getId())) {
             viewHolder.title.setTextColor(Color.GRAY);
-        }else {
+        } else {
             viewHolder.title.setTextColor(Color.BLACK);
         }
     }
@@ -74,7 +74,7 @@ public class MainNewsAdapter extends RecyclerView.Adapter<MainNewsAdapter.ViewHo
         return mdata.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         View view;
         ImageView icon;
         TextView title;
