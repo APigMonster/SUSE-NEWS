@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +13,7 @@ import android.widget.ImageView;
 import com.suse.susenews.R;
 import com.suse.susenews.utils.CacheUtils;
 
-public class UserNameActivity extends Activity implements View.OnClickListener {
+public class UserNameSignActivity extends Activity implements View.OnClickListener {
 
     private EditText et_ex_name;
     private Button btn_save_name;
@@ -67,9 +66,10 @@ public class UserNameActivity extends Activity implements View.OnClickListener {
     }
 
     public void saveName(View v) {
-        String value = et_ex_name.getText().toString();
-        CacheUtils.putString(UserNameActivity.this, CacheUtils.USER_ACCOUNT, CacheUtils.USER_NAME, value);
-        startActivity(new Intent(UserNameActivity.this, PersonInfoActivity.class));
+        String result = et_ex_name.getText().toString();
+        Intent intent = new Intent();
+        intent.putExtra("RESULT", result);
+        setResult(3,intent);
         finish();
     }
 }

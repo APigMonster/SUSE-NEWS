@@ -87,7 +87,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 Toast.makeText(SearchActivity.this, "搜索内容不能为空", Toast.LENGTH_SHORT).show();
             } else {
                 //判断是否存在
-                if (!Arrays.asList(data).contains(getEditTextValue())) {
+                if (!data.contains(getEditTextValue())) {
                     String value = sdata + getEditTextValue() + ",";
                     CacheUtils.putString(SearchActivity.this, CacheUtils.SPNAME, SEARCH_HISTORY, value);
                     Toast.makeText(SearchActivity.this, "搜索 : " + getEditTextValue(), Toast.LENGTH_SHORT).show();

@@ -29,8 +29,9 @@ public class WelcomeActivity extends Activity {
     private void isStartMain() {
         boolean isStartMain = CacheUtils.getBoolean(WelcomeActivity.this, CacheUtils.SPNAME, START_MAIN);
         if (isStartMain) {
+            String loginAccount = CacheUtils.getString(WelcomeActivity.this, CacheUtils.SPNAME, "login_account");
             //进入过主界面，直接进入主界面
-            if (CacheUtils.USER_ACCOUNT.isEmpty()){
+            if (loginAccount.isEmpty()){
                 startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
             }else {
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));

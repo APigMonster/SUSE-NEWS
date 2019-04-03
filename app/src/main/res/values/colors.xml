@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="mycolor">#174717</color>
+    <color name="myyellow">#c4a910</color>
+    <color name="mygray">#8c8c8c</color>
     <color name="btnEnable">#949494</color>
 </resources>

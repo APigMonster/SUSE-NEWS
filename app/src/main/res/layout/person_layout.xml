@@ -10,10 +10,10 @@
         android:id="@+id/rl_person_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:background="#ffffff"
         android:paddingLeft="10dp"
         android:paddingTop="25dp"
-        android:layout_marginBottom="20dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp">
 
@@ -58,15 +58,14 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_person_relate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_exit_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="退出登录"
         android:background="@drawable/exit_login_bg"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="退出登录" />
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:id="@+id/rl_person_simple_info_name"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#fff">
+    android:background="#d4d4d4">
 
     <TextView
         android:id="@+id/tv_name"
@@ -21,23 +21,12 @@
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
         android:background="#d6d6d6" />
-
-
-    <ImageView
-        android:id="@+id/iv__user_name_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/right" />
-
     <TextView
         android:id="@+id/tv_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@id/iv__user_name_right"
+        android:layout_marginRight="30dp"
         android:text="张三" />
 </RelativeLayout>

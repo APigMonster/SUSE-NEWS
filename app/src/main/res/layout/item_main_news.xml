@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="5dp"
     android:layout_height="90dp">
 
 
@@ -9,8 +8,8 @@
         android:id="@+id/mian_item_icon"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_alignParentRight="true"
-        android:layout_margin="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
         android:src="@mipmap/icon" />
 
     <LinearLayout
@@ -18,7 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="15dp"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
+        android:layout_alignLeft="@id/main_item_title"
+        android:layout_margin="10dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -39,10 +39,9 @@
         android:id="@+id/main_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="15dp"
         android:text="这是一个标题，我想写长一点可以"
-        android:layout_toLeftOf="@id/mian_item_icon"
-        android:layout_above="@id/ll_item"
+        android:layout_toRightOf="@id/mian_item_icon"
         android:textSize="18sp"
         android:textStyle="bold" />
     <View

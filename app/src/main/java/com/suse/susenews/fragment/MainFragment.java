@@ -1,5 +1,6 @@
 package com.suse.susenews.fragment;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -14,6 +15,9 @@ public class MainFragment extends BaseFragment {
 
     private FrameLayout fl_base;
     private RadioGroup rg_base;
+    private MainNewsFragment mMainNewsFragment = new MainNewsFragment();
+    private PersonFragment mPersonFragment = new PersonFragment();
+    private RecreationNewsFragment mRecreationNewsFragment = new RecreationNewsFragment();
 
     @Override
     public View initView() {
@@ -30,7 +34,7 @@ public class MainFragment extends BaseFragment {
         //设置默认选中第一个页面
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fl_base, new MainNewsFragment());
+        transaction.replace(R.id.fl_base, mMainNewsFragment);
         transaction.commit();
         //给RadioButton设置监听
         rg_base.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
@@ -44,19 +48,19 @@ public class MainFragment extends BaseFragment {
                 case R.id.rb_main:
                     FragmentManager fragmentManager1 = getChildFragmentManager();
                     FragmentTransaction transaction1 = fragmentManager1.beginTransaction();
-                    transaction1.replace(R.id.fl_base, new MainNewsFragment());
+                    transaction1.replace(R.id.fl_base, mMainNewsFragment);
                     transaction1.commit();
                     break;
                 case R.id.rb_recreation:
                     FragmentManager fragmentManager2 = getChildFragmentManager();
                     FragmentTransaction transaction2 = fragmentManager2.beginTransaction();
-                    transaction2.replace(R.id.fl_base, new RecreationNewsFragment());
+                    transaction2.replace(R.id.fl_base, mRecreationNewsFragment);
                     transaction2.commit();
                     break;
                 case R.id.rb_person:
                     FragmentManager fragmentManager3 = getChildFragmentManager();
                     FragmentTransaction transaction3 = fragmentManager3.beginTransaction();
-                    transaction3.replace(R.id.fl_base, new PersonFragment());
+                    transaction3.replace(R.id.fl_base, mPersonFragment);
                     transaction3.commit();
                     break;
                 default:

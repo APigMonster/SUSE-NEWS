@@ -27,7 +27,7 @@
         <activity android:name=".activity.PersonAppoActivity" />
         <activity android:name=".activity.PersonMsgActivity" />
         <activity android:name=".activity.PersonInfoActivity" />
-        <activity android:name=".activity.UserNameActivity" />
+        <activity android:name=".activity.UserNameSignActivity" />
         <activity android:name=".activity.LoginActivity"></activity>
     </application>
 

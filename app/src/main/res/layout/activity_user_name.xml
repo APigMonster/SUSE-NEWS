@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.UserNameActivity">
+    tools:context=".activity.UserNameSignActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/iv_exname_back"
-            android:text="更换名字"
+            android:text="更换信息"
             android:textColor="#000"
             android:textSize="17sp" />
 

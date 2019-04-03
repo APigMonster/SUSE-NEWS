@@ -38,6 +38,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private RecyclerView rv_person_relate;
     private List<PersonRelateBean> data = new ArrayList<>();
     private PersonRelateAdapter adapter;
+    private ImageView iv_person_icon;
+    private boolean isinitListDataed;
 
     /**
      * Find the Views in the layout<br />
@@ -47,6 +49,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
      */
     private void findViews(View view) {
         rlPersonInfo = view.findViewById(R.id.rl_person_info);
+        iv_person_icon = view.findViewById(R.id.iv_person_icon);
         btn_exit_login = view.findViewById(R.id.btn_exit_login);
 
         rv_person_relate = view.findViewById(R.id.rv_person_relate);
@@ -64,8 +67,11 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         rlPersonInfo.setOnClickListener(this);
         btn_exit_login.setOnClickListener(this);
 
+        //设置头像
+
         //初始化数据，并设置适配器
         initListData();
+        isinitListDataed = true;
         adapter = new PersonRelateAdapter(data, mcontext);
         LinearLayoutManager manager = new LinearLayoutManager(mcontext);
         rv_person_relate.setLayoutManager(manager);
@@ -74,9 +80,11 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     }
 
     private void initListData() {
-        data.add(new PersonRelateBean(R.drawable.appointment__icon, "我的预约"));
-        data.add(new PersonRelateBean(R.drawable.my_msg, "我的信息"));
-        data.add(new PersonRelateBean(R.drawable.wait, "待开发"));
+        if (!isinitListDataed){
+            data.add(new PersonRelateBean(R.drawable.appointment__icon, "我的预约"));
+            data.add(new PersonRelateBean(R.drawable.my_msg, "我的信息"));
+            data.add(new PersonRelateBean(R.drawable.wait, "待开发"));
+        }
     }
 
     @Override

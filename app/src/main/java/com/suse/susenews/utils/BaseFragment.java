@@ -11,7 +11,21 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
     //获取上下文
-    public Context mcontext;
+    public static Context mcontext;
+    private String title;
+
+    public BaseFragment(String title) {
+        super();
+        this.title = title;
+    }
+
+    public BaseFragment() {
+        this("");
+    }
+
+    public String getTitle() {
+        return title;
+    }
 
     /**
      * 当Fragment被创建时
