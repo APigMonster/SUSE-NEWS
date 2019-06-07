@@ -14,13 +14,13 @@
         android:layout_marginRight="15dp"
         android:orientation="vertical"
         android:layout_alignParentBottom="true">
-        <Button
+        <!--<Button
             android:id="@+id/icon_btn_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/white_btn_top"
             android:textColor="@color/mycolor"
-            android:text="拍照"/>
+            android:text="拍照"/>-->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_btn_bottom"
             android:textColor="@color/mycolor"
-            android:text="从相册选择"/>
+            android:text="选择头像"/>
         <Button
             android:id="@+id/icon_btn_cancel"
             android:layout_width="match_parent"

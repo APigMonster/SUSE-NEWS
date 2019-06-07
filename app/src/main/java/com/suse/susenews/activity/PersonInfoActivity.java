@@ -17,11 +17,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.suse.susenews.R;
 import com.suse.susenews.adapter.PersonSimpleInfoAdapter;
 import com.suse.susenews.bean.PersonSimpleInfoBean;
+import com.suse.susenews.bean.Student;
 import com.suse.susenews.java.PhotoPopupWindow;
 import com.suse.susenews.utils.CacheUtils;
+import com.suse.susenews.utils.Constants;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,6 +56,8 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
     private static final int REQUEST_BIG_IMAGE_CUTTING = 3;
     private static final String IMAGE_FILE_NAME = "icon.jpg";
 
+    private Student student;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +65,7 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
 
         findViews();
         //初始化数据
+        student = new Gson().fromJson(getIntent().getStringExtra("student"), Student.class);
         initData();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rv_person_simple_info.setLayoutManager(manager);
@@ -64,11 +74,17 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
 
     private void initData() {
         //用户名应该从数据库查询得到
-        data.add(new PersonSimpleInfoBean("姓名", "王小二"));
-        data.add(new PersonSimpleInfoBean("学号", "15101010510"));
-        data.add(new PersonSimpleInfoBean("专业", "软件工程"));
-        data.add(new PersonSimpleInfoBean("学制", "本科(四年)"));
-        data.add(new PersonSimpleInfoBean("入学时间", "2015.9"));
+        data.add(new PersonSimpleInfoBean("姓名", student.getName()));
+        data.add(new PersonSimpleInfoBean("学号", student.getNo()));
+        data.add(new PersonSimpleInfoBean("专业", student.getMajor()));
+        data.add(new PersonSimpleInfoBean("学制", student.getEdusys()));
+        data.add(new PersonSimpleInfoBean("入学时间", student.getCreattime()));
+
+        //初始化头像昵称和个签
+        x.image().bind(iv_head_portrait, Constants.UPLOAD_URL + student.getHeadpor());
+        tv_user_name_value.setText(student.getNickname());
+        tv_person_signature_value.setText(student.getPersonsign());
+
     }
 
     private void findViews() {
@@ -110,12 +126,17 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == 3) {
+            String result = data.getStringExtra("RESULT");
             switch (requestCode) {
                 case 1:
-                    tv_user_name_value.setText(data.getStringExtra("RESULT"));
+                    //昵称
+                    tv_user_name_value.setText(result);
+                    setStudentInfo("nickname", result);
                     break;
                 case 2:
-                    tv_person_signature_value.setText(data.getStringExtra("RESULT"));
+                    //个签
+                    tv_person_signature_value.setText(result);
+                    setStudentInfo("personsign", result);
                     break;
             }
         } else if (resultCode == RESULT_OK) {
@@ -138,6 +159,37 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
                     break;
             }
         }
+        //触发了这个方法，一定有信息被更改了。所以应该重新请求数据(重新请求数据应该在这个页面的上一层中 即PersonFragment.java)
+    }
+
+    private void setStudentInfo(String key, String value) {
+        String no = student.getNo();
+        RequestParams requestParams = new RequestParams(Constants.STUDENT_UPDATA_URL);
+        requestParams.addQueryStringParameter("NO", no);
+        requestParams.addQueryStringParameter("KEY", key);
+        requestParams.addQueryStringParameter("VALUE", value);
+
+        x.http().get(requestParams, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.e("TAG", "更新个人信息成功");
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("TAG", "更新个人信息失败  " + ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 
     /**
@@ -162,6 +214,7 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
      */
     private void setPicToView(Intent data) {
         Bundle extras = data.getExtras();
+        File file = null;
         if (extras != null) {
             Bitmap photo = extras.getParcelable("data"); // 直接获得内存中保存的 bitmap
             // 创建 smallIcon 文件夹
@@ -175,7 +228,7 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
                         Log.e("TAG", "文件夹创建成功");
                     }
                 }
-                File file = new File(dirFile, "HEAD_PORTRAIT.jpg");
+                file = new File(dirFile, "HEAD_PORTRAIT.jpg");
                 // 保存图片
                 FileOutputStream outputStream = null;
                 try {
@@ -187,9 +240,42 @@ public class PersonInfoActivity extends Activity implements View.OnClickListener
                     e.printStackTrace();
                 }
             }
+            //上传图片到服务器
+            uploadFile(file);
+
             // 在视图中显示图片
             iv_head_portrait.setImageBitmap(photo);
         }
+    }
+
+    private void uploadFile(File file) {
+        RequestParams params = new RequestParams(Constants.STUDENT_UPLOAD_URL);
+        params.setMultipart(true);
+        params.addBodyParameter("file", file);
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.e("TAG", "图片上传成功 result == " + result);
+                //设置fileName
+                String fileName = result.substring(13, result.length() - 2);
+                //把图片路径保存到数据库中
+                setStudentInfo("headpor", fileName);
+                //Log.e("TAG", "fileName == " + result.substring(13, result.length() - 2));
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("TAG", "图片上传失败  " + ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
     }
 
     private void setImageHead() {

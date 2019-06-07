@@ -2,23 +2,23 @@ package com.suse.susenews.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Icon;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.suse.susenews.R;
+import com.suse.susenews.activity.AppointegralActivity;
 import com.suse.susenews.activity.PersonAppoActivity;
 import com.suse.susenews.activity.PersonMsgActivity;
 import com.suse.susenews.bean.PersonRelateBean;
-import com.suse.susenews.fragment.PersonFragment;
 
 import java.util.List;
-import java.util.Map;
 
 public class PersonRelateAdapter extends RecyclerView.Adapter<PersonRelateAdapter.ViewHolder>{
 
@@ -34,7 +34,7 @@ public class PersonRelateAdapter extends RecyclerView.Adapter<PersonRelateAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_person_adapter, viewGroup, false);
+                .inflate(R.layout.person_extend_item, viewGroup, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         //设置监听
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +42,13 @@ public class PersonRelateAdapter extends RecyclerView.Adapter<PersonRelateAdapte
             public void onClick(View v) {
                 int position = viewHolder.getAdapterPosition();
                 switch (position){
-                    case 0:context.startActivity(new Intent(context, PersonAppoActivity.class));
+                    case 0:
+                        Intent intent = new Intent(context, PersonAppoActivity.class);
+                        //Log.e("TAG", "obj == "+data.get(position).getObject());
+                        //intent.putExtra("DATA", data.get(position).getObject());
+                        context.startActivity(intent);
                         break;
-                    case 1:context.startActivity(new Intent(context, PersonMsgActivity.class));
+                    case 1:context.startActivity(new Intent(context, AppointegralActivity.class));
                         break;
                     default:
                         break;
@@ -64,11 +68,12 @@ public class PersonRelateAdapter extends RecyclerView.Adapter<PersonRelateAdapte
             viewHolder.view_line.setVisibility(View.GONE);
         }
         //判断是否有新消息，确定是否显示红色提示小点
-        isNews();
+        if (bean.getObject().equals("no")){
+            viewHolder.iv_red_point.setVisibility(View.GONE);
+        }
     }
 
-    private void isNews() {
-    }
+
 
     @Override
     public int getItemCount() {

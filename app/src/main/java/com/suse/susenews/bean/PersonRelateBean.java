@@ -1,16 +1,22 @@
 package com.suse.susenews.bean;
 
-public class PersonRelateBean {
+public class PersonRelateBean{
 
     private int icon;
     private String title;
+    private String object;
 
     public PersonRelateBean() {
     }
 
     public PersonRelateBean(int icon, String title) {
+        this(icon, title, null);
+    }
+
+    public PersonRelateBean(int icon, String title, String object) {
         this.icon = icon;
         this.title = title;
+        this.object = object;
     }
 
     public int getIcon() {
@@ -29,11 +35,11 @@ public class PersonRelateBean {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return "PersonRelateBean{" +
-                "icon=" + icon +
-                ", title='" + title + '\'' +
-                '}';
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
     }
 }

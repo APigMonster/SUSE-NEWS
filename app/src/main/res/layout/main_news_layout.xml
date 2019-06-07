@@ -4,9 +4,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-   <include layout="@layout/titlebar_layout"/>
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/rv_main_news"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent" />
+    <include layout="@layout/titlebar_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#44000000"
+            android:padding="3dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="这是一个标题"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_point_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main_news"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

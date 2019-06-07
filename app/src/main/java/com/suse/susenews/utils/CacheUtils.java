@@ -11,7 +11,7 @@ public class CacheUtils {
     public static final String ISLOGIN = "ISLOGIN";
     public static final String SPNAME = "SUSE";
 
-    public static  String USER_ACCOUNT = "";//在登录后更新这个值
+    public static  String USER_ACCOUNT = "123";//在登录后更新这个值
 
     public static boolean getBoolean(Context context,String spname, String key) {
         SharedPreferences sp = context.getSharedPreferences(spname, Context.MODE_PRIVATE);

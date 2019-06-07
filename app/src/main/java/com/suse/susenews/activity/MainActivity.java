@@ -1,6 +1,5 @@
 package com.suse.susenews.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity{
         if(event.getKeyCode()==KeyEvent.KEYCODE_BACK) {
             if(!exit) {
                 exit = true;
-                Toast.makeText(this, "再按一次就退出应用", 0).show();
+                Toast.makeText(this, "再按一次就退出应用", Toast.LENGTH_SHORT).show();
                 //发消息延迟2s将exit=false
                 handler.sendEmptyMessageDelayed(1, 2000);
                 return true;//不退出

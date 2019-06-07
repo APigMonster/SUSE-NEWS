@@ -33,12 +33,12 @@ public class PhotoPopupWindow extends PopupWindow {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mView = inflater.inflate(R.layout.pop_item, null);
-        Button btn_camera = mView.findViewById(R.id.icon_btn_camera);
+        //Button btn_camera = mView.findViewById(R.id.icon_btn_camera);
         Button btn_select = mView.findViewById(R.id.icon_btn_select);
         Button btn_cancel = mView.findViewById(R.id.icon_btn_cancel);
 
         btn_select.setOnClickListener(mSelectListener);
-        btn_camera.setOnClickListener(mCaptureListener);
+        //btn_camera.setOnClickListener(mCaptureListener);
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
